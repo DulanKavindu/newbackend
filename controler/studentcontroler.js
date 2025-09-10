@@ -15,7 +15,7 @@ export function addStudent (req,res){
    const newstudent=new student({
     name:req.body.name,
     age:req.body.age,
-    gender:req.body.gender
+    grade:req.body.grade
    })
     newstudent.save().then(()=>{
         res.json({
