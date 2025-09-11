@@ -6,6 +6,7 @@ import productrouter from './routes/productrouter.js';
 import userrouter from './routes/user.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import oderrouter from './routes/oder.js';
 
 const app = express();
 dotenv.config();
@@ -40,7 +41,7 @@ app.use((req, res, next) => {
 app.use('/students',studentRoute);
 app.use('/products',productrouter);
 app.use('/users',userrouter);
-
+app.use('/orders',oderrouter);
 
 app.listen(3000, 
     () => {

@@ -1,5 +1,6 @@
 
 import product from "../models/productmodel.js";
+import { isaddmin,iscustomer } from "./user.js";
 
 export function getProducts(req,res){
     product.find().then((products)=>{
