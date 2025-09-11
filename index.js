@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (token != null) {   // or just -> if(token)
-    jwt.verify(token, "cbc-key2580", (err, decoded) => {
+    jwt.verify(token, process.env.SKEY, (err, decoded) => {
       if (!err) {
         req.user = decoded; // decoded payload set karanna
       } else {

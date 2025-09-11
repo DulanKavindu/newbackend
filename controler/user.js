@@ -44,7 +44,7 @@ export function loginUser(req,res){
                  lastName:userdata.lastName,
                  isBlock:userdata.isBlock,
                  profilePic:userdata.profilePic,
-            },"cbc-key2580")
+            },process.env.SKEY,)
             res.json({
                 message:'Login successful',
                 token:token,})
