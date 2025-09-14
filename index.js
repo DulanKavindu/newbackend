@@ -7,6 +7,7 @@ import userrouter from './routes/user.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import oderrouter from './routes/oder.js';
+import cors from 'cors';
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,7 @@ const connection=mongoose.connection;
 connection.once('open',()=>{
     console.log('MongoDB database connection established successfully');
 });
+app.use(cors());
 
 
 app.use(bodyParser.json());
