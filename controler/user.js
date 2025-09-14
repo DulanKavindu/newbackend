@@ -2,6 +2,7 @@ import user from "../models/usermodel.js";
 import bcrypt from 'bcrypt';
 import  JsonWebToken from "jsonwebtoken";
 
+
 export function getUsers(req,res){
     user.find().then((users)=>{
         res.json({
@@ -58,7 +59,16 @@ export function loginUser(req,res){
             },process.env.SKEY,)
             res.json({
                 message:'Login successful',
-                token:token,})
+                token:token,
+                user:{
+                    firstName:user.firstName,
+                    lastName:user.lastName,
+                    email:user.email,
+                    type: user.type,
+                    profilePic:user.profilePic
+
+                }
+            })
         }
         else{
             res.json({message:'Invalid password'})
