@@ -6,7 +6,7 @@ const productrouter=express.Router();
 
 productrouter.get('/',getProducts)
 productrouter.get('/:name',getProductByName)
-productrouter.delete('/',removeProduct)
+productrouter.delete("/:productid", removeProduct);
 
 productrouter.post('/',addProduct)
    

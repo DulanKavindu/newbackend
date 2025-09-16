@@ -38,14 +38,43 @@ export function addProduct (req,res){
             error:err})
     }   ) }
 
-export function removeProduct(req,res){
-    product.deleteOne({name:req.body.name}).then(()=>{
-        res.json({
-            message:'Product deleted successfully'}
-        )}).catch((err)=>{res.json({
-            message:'Error in deleting product',
-            error:err})
-        }) } 
+export async function removeProduct(req, res) {
+  try {
+    // 🔐 Check admin
+    if ( !isaddmin) {
+      return res.status(403).json({
+        message: "Please log in as an admin to delete a product",
+      });
+    }
+
+    // 🆔 Get product ID from route params
+    const productid = req.params.productid;
+
+  console.log(productid)
+
+    // 🗑️ Delete product (use productid OR _id depending on schema)
+    const result = await product.deleteOne({ productid: productid });
+    // 👉 if you are using MongoDB _id:
+    // const result = await product.deleteOne({ _id: productid });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({
+        message: "Product not found",
+      });
+    }
+
+    res.json({
+      message: "✅ Product deleted successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "❌ Error in deleting product",
+      error: err.message,
+    });
+  }
+}
+
+
         
 export function getProductByName(req,res){
     const name = req.params.name

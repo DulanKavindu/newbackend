@@ -18,7 +18,7 @@ export async function addUser(req, res) {
         const newdata = req.body;
 
         // Admin user check
-        if (newdata.type === 'admin') {
+        if (newdata.type === null) {
             if (!req.user) {
                 return res.status(401).json({ message: 'First you have to login' });
             }
@@ -43,7 +43,7 @@ export async function addUser(req, res) {
 }
 export function loginUser(req,res){
    user.findOne({email:req.body.email}).then((userdata)=>{
-    if(userdata.lenght===0){
+    if(!userdata){
         res.json({message:'User not found'})
     }
     else{
@@ -61,11 +61,11 @@ export function loginUser(req,res){
                 message:'Login successful',
                 token:token,
                 user:{
-                    firstName:user.firstName,
-                    lastName:user.lastName,
-                    email:user.email,
-                    type: user.type,
-                    profilePic:user.profilePic
+                    firstName:userdata.firstName,
+                    lastName:userdata.lastName,
+                    email:userdata.email,
+                    type: userdata.type,
+                    profilePic:userdata.profilePic
 
                 }
             })
@@ -76,6 +76,7 @@ export function loginUser(req,res){
    }
 } 
 )}
+
 export function isaddmin(req){
     if(req.user==null){
         
