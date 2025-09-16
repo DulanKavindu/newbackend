@@ -87,5 +87,25 @@ export function getProductByName(req,res){
             message:'Error in fetching product',
             error:err})
     })
-}        
-export default {getProducts,addProduct,removeProduct,getProductByName};
+}  
+export function updateproduct(req,res){
+  if(!isaddmin){
+    res.json({
+      massage:"to upadete a product you have to login as an admin"
+    })
+    return
+  }
+  const produtid=req.params.productid;
+  const newdata=req.body 
+  product.updateOne({produtid:produtid},newdata).then(()=>{
+    res.json({
+      massage:"product update ok"
+    })
+  }).catch((err)=>{
+    res.json({
+      error:err
+    })
+  })
+
+}      
+export default {getProducts,addProduct,removeProduct,getProductByName,updateproduct};
