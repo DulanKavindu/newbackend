@@ -81,13 +81,13 @@ export async function getProductById(req, res) {
     const productId = req.params.id;
 
     
-    const product = await Product.findOne({ productid: productId });
+    const products = await Product.findOne({ productid: productId });
 
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    res.json(product);
+    res.json(products);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: err.message });
