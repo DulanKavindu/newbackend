@@ -16,7 +16,7 @@ export function getProducts(req,res){
 export function addProduct (req,res){
     console.log(req.user)
    if(req.user==null){
-    res.json({
+    res.status(500)({
         massage:"user not login"
     })
     return
