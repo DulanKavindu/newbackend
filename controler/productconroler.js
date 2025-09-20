@@ -100,10 +100,10 @@ export function updateproduct(req,res){
       massage:"to upadete a product you have to login as an admin"
     })
     return
-  }
-  const produtid=req.params.productid;
+  } 
+  const productid=req.params.productid;
   const newdata=req.body 
-  product.updateOne({produtid:produtid},newdata).then(()=>{
+  product.updateOne({productid:productid},newdata).then(()=>{
     res.json({
       massage:"product update ok"
     })
